@@ -10,7 +10,7 @@ recycle_db = create_engine(sql_connection, echo=True)
 
 data = []
 with Session(recycle_db) as conn:
-    result = conn.execute(text("select prediction, score, max(date) as date from predictions group by prediction, score order by max(date) desc;"), dict())
+    result = conn.execute(text("select prediction, max(score) as score, max(date) as date from predictions group by prediction order by max(date) desc;"), dict())
     for row in result.mappings():
         info = dict()
         info["prediction"] = row["prediction"]
