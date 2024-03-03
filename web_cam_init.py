@@ -1,6 +1,5 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, text
-from recycle_conn_mysql import MYSQL_RECYCLE
 import threading
 from ultralytics import YOLO
 import cv2
