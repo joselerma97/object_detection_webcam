@@ -3,3 +3,5 @@ ultralytics
 SQLAlchemy
 pymysql
 streamlit
+cryptography
+mysql-connector-python
