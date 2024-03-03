@@ -91,7 +91,7 @@ def init_web_cam(prefix):
                     threading.Thread(target=insert_prediction,
                                      args=(str(classNames[cls]), confidence, recycle_db)).start()
 
-        cv2_imshow('Webcam', img)
+        cv2_imshow(img)
         if cv2.waitKey(1) == ord('q'):
             break
 
