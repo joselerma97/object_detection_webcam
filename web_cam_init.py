@@ -17,7 +17,7 @@ def insert_prediction(prediction, score, db):
         conn.execute(text(f"insert into predictions(prediction, score, date) values('{prediction}',{score}, now())"), dict())
         conn.commit()
 
-def init_web_cam(prefix: str = ""):
+def init_web_cam(prefix):
     sql_connection = f"mysql+mysqlconnector://{MYSQL_RECYCLE.USER_NAME.value}:{MYSQL_RECYCLE.PASSWORD.value}@{MYSQL_RECYCLE.HOST.value}/{MYSQL_RECYCLE.NAME.value}"
     recycle_db = create_engine(sql_connection, echo=True)
 
