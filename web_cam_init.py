@@ -17,11 +17,11 @@ def insert_prediction(prediction, score, db):
         conn.execute(text(f"insert into predictions(prediction, score, date) values('{prediction}',{score}, now())"), dict())
         conn.commit()
 
-def init_web_cam():
+def init_web_cam(prefix: str = ""):
     sql_connection = f"mysql+mysqlconnector://{MYSQL_RECYCLE.USER_NAME.value}:{MYSQL_RECYCLE.PASSWORD.value}@{MYSQL_RECYCLE.HOST.value}/{MYSQL_RECYCLE.NAME.value}"
     recycle_db = create_engine(sql_connection, echo=True)
 
-    waste_detection_v8m = {"model": "wasteDetection/wasteDetectionv8m.pt",
+    waste_detection_v8m = {"model": f"{prefix}wasteDetection/wasteDetectionv8m.pt",
                            "classNames": ["biodegradable",
                                           "clothes",
                                           "electronic",
@@ -32,13 +32,13 @@ def init_web_cam():
     recycle_class_names = ["Can", "Glass", "Plastic", "glass"]
 
     # Al parecer funcionan mejor los n en la web cam...
-    recycle_detection_v8n = {"model": "recycle/recycle_v8n.pt",
+    recycle_detection_v8n = {"model": f"{prefix}recycle/recycle_v8n.pt",
                              "classNames": recycle_class_names}
-    recycle_detection_v8m = {"model": "recycle/recycle_v8m.pt",
+    recycle_detection_v8m = {"model": f"{prefix}recycle/recycle_v8m.pt",
                              "classNames": recycle_class_names}
 
     # Subir manual porque pesa más de 100Mb
-    recycle_detection_v8x = {"model": "recycle/recycle_v8x.pt",
+    recycle_detection_v8x = {"model": f"{prefix}recycle/recycle_v8x.pt",
                              "classNames": recycle_class_names}
 
     model_detection = recycle_detection_v8n
